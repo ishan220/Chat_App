@@ -1,0 +1,5 @@
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS chat;
+ALTER TABLE IF EXISTS "contact_list" DROP CONSTRAINT IF EXISTS
+"username_member";
+DROP TABLE IF EXISTS contact_list;
