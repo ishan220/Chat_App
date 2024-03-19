@@ -43,7 +43,8 @@ func (server *HttpServer) SetUpRoutes(Pool *socket_pkg.Pool) {
 }
 
 func (server *HttpServer) Run() error {
-	return server.router.Run("localhost:8080")
+	//return server.router.Run("localhost:8080")
+	return server.router.Run("https://chat-on-the-go.up.railway.app/")
 }
 
 func errResponse(err error) gin.H {
