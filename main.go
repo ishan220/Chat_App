@@ -3,8 +3,8 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"log"
 
-	"github.com/aws/aws-lambda-go/lambda"
 	db "github.com/ishan/Chat_App/db/sqlc"
 	"github.com/ishan/Chat_App/pkg/httpserver"
 	socket_pkg "github.com/ishan/Chat_App/pkg/websocket"
@@ -41,15 +41,15 @@ func main() {
 	store := db.NewStore(conn)
 	pool := socket_pkg.NewPool()
 
-	//httpServer := httpserver.NewHttpServer(store, pool)
-	_ = httpserver.NewHttpServer(store, pool)
+	httpServer := httpserver.NewHttpServer(store, pool)
+	//_ = httpserver.NewHttpServer(store, pool)
 
 	go pool.Start()
-	lambda.Start(httpserver.Handler)
+	//lambda.Start(httpserver.Handler)
 
-	// err1 := httpServer.Run()
+	err1 := httpServer.Run()
 
-	// if err1 != nil {
-	// 	log.Fatal("Cannot start the server")
-	// }
+	if err1 != nil {
+		log.Fatal("Cannot start the server")
+	}
 }
