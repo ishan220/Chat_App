@@ -1,10 +1,13 @@
 package httpserver
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"time"
 
+	"github.com/aws/aws-lambda-go/events"
+	ginadapter "github.com/awslabs/aws-lambda-go-api-proxy/gin"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	db "github.com/ishan/Chat_App/db/sqlc"
@@ -12,7 +15,7 @@ import (
 	socket_pkg "github.com/ishan/Chat_App/pkg/websocket"
 )
 
-//var ginLambda *ginadapter.GinLambda
+var ginLambda *ginadapter.GinLambda
 
 type HttpServer struct {
 	store  *db.SQLStore
@@ -42,7 +45,7 @@ func (server *HttpServer) SetUpRoutes(Pool *socket_pkg.Pool) {
 	router.GET("/ws", server.WebSocketHandler)
 	server.Pool = Pool
 	server.router = router
-	//ginLambda = ginadapter.New(router)
+	ginLambda = ginadapter.New(router)
 }
 
 func (server *HttpServer) Run() error {
@@ -62,10 +65,10 @@ func WebSocketMiddleWare(Pool *socket_pkg.Pool, Server *HttpServer) gin.HandlerF
 	}
 }
 
-// func Handler(ctx context.Context, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
-// 	// If no name is provided in the HTTP request body, throw an error
-// 	return ginLambda.ProxyWithContext(ctx, req)
-// }
+func Handler(ctx context.Context, req events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error) {
+	// If no name is provided in the HTTP request body, throw an error
+	return ginLambda.ProxyWithContext(ctx, req)
+}
 
 func (Server *HttpServer) WebSocketHandler(ctx *gin.Context) {
 
