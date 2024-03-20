@@ -3,6 +3,8 @@ module github.com/ishan/Chat_App
 go 1.21.5
 
 require (
+	github.com/aws/aws-lambda-go v1.46.0
+	github.com/awslabs/aws-lambda-go-api-proxy v0.16.1
 	github.com/gin-contrib/cors v1.5.0
 	github.com/gin-gonic/gin v1.9.1
 	github.com/gorilla/websocket v1.5.1
