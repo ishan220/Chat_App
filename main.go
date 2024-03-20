@@ -44,7 +44,7 @@ func main() {
 	httpServer := httpserver.NewHttpServer(store, pool)
 
 	go pool.Start()
-	//go lambda.Start(handler) //aws lamda function to deploy on netlify
+
 	err1 := httpServer.Run()
 
 	if err1 != nil {
