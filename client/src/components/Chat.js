@@ -13,7 +13,8 @@ const Chat = () => {
      const queryParams = new URLSearchParams(location.search)
      const user = queryParams.get('username')
      const chatRef = useRef();
-       
+     const toRef = useRef();
+ 
      const [state,setState] = useState({username:user,
                                         renderedContactList:[],
                                         searchContact:"",
@@ -24,11 +25,11 @@ const Chat = () => {
         const [chatHistory,setChatHistory]=useState([])        
         const [socketConn,setSocketConn]=useState() 
         chatRef.current=chatHistory
-                 
+        toRef.current=state.to       
         const [contactList,setContactList]  =useState([])                               
         const [message,setMessage] = useState("")
 
-
+    console.log("${process.env.BACKEND_HOST}:",process.env.REACT_APP_BACKEND_HOST)
     const sendMessageTo = (to) => {
         console.log("On clicking on contact:",to)
         fetchChatHistory(state.username,to)
@@ -38,7 +39,7 @@ const Chat = () => {
     ///this is called on clicking on Add contact
     const addContact = async(e,searchContact) =>{
         e.preventDefault()
-        await axios.post(`http://localhost:8080/addContact`,{
+        await axios.post(`${process.env.REACT_APP_BACKEND_HOST}/addContact`,{
             username:state.username,
             last_activity:23121,
             member:state.searchContact
@@ -57,7 +58,7 @@ const Chat = () => {
     const fetchChatHistory = async(from ,to) => {
       //  let newChatHistory=state.chatHistory;
         let newChatHistory =  chatRef.current;
-          await axios.get(`http://localhost:8080/ChatBtwnUsers?from=${from}&to=${to}`)
+          await axios.get(`${process.env.REACT_APP_BACKEND_HOST}/ChatBtwnUsers?from=${from}&to=${to}`)
          .then((response)=>{
             console.log("response data from fetch chat api",response.data)
             if(response.data){
@@ -77,12 +78,14 @@ const Chat = () => {
 
      const getContacts = async(username)=>{
             let contacts=[];
-            await axios.get(`http://localhost:8080/getContacts?username=${state.username}`)
+            //await axios.get(`http://localhost:8080/getContacts?username=${state.username}`)
+           
+            await axios.get(`${process.env.REACT_APP_BACKEND_HOST}/getContacts?username=${state.username}`)
             .then((response)=>{console.log("response",response.data);
                 if(response.data && response.data.length>0)
                 contacts=response.data
             } ).catch((error)=>{
-           //     console.log("Error from get Contacts",error)
+                console.log("Error from get Contacts",error)
             }) 
            // setContactList({ContactList:contacts})
             setState((prevState)=>({...prevState,contactList:contacts}))
@@ -118,16 +121,16 @@ const Chat = () => {
     }
      useEffect(()=>{
               //console.log("Use effect getting called")
-              const socket = new WebSocket("ws://localhost:8080/ws")
+              const socket = new WebSocket(`ws://${process.env.REACT_APP_WEBSOCKET_HOST}/ws`)
               setSocketConn(socket)
               HandlingSocketConn(socket,(msg)=>{
                                         console.log("Msg received from another client",msg.data) 
                                         const message = JSON.parse(msg.data);
-                                        // console.log("message ka type",typeof(message))
-                                        // console.log("msg ToUser: User",message.to_user,":",user)
-                                        if(message.to_user == user && state.to == message.from_user)
+                                         console.log("message ka type",typeof(message))
+                                         console.log("msg ToUser: User",message.to_user,":",user)
+                                         console.log("state.to ,message.from_user",state.to,":",message.from_user)
+                                        if(message.to_user == user && toRef.current == message.from_user)
                                         {
-                                        console.log("fetch api called on incoming message")
                                         let currChatHist = chatRef.current;
                                         console.log("chat history before pushing",currChatHist)
                                         currChatHist.push(message)
@@ -147,6 +150,7 @@ const Chat = () => {
             },[])
 
         const renderChatHistory = (chatHistory) => {
+            console.log("renderChatHistory Called ")
             const renderedChatHistory = ChatHistory(chatHistory,user)
             setState((prev)=>({...prev,renderedChatHistory}))
         }
