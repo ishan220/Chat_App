@@ -33,7 +33,7 @@ func (server *HttpServer) SetUpRoutes(Pool *socket_pkg.Pool) {
 	router := gin.Default()
 	//Pool := socket_pkg.NewPool()
 	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"http://localhost:3000", "http://localhost:3000/ws"}
+	config.AllowOrigins = []string{"http://localhost:3000", "http://localhost:3001", "http://localhost:3000/ws", "https://chat-on-go.netlify.app"}
 	router.Use(cors.New(config))
 	router.POST("/create-user", server.createUser)
 	router.POST("/login", server.loginUser)
@@ -45,7 +45,7 @@ func (server *HttpServer) SetUpRoutes(Pool *socket_pkg.Pool) {
 	router.GET("/ws", server.WebSocketHandler)
 	server.Pool = Pool
 	server.router = router
-	ginLambda = ginadapter.New(router)
+	// ginLambda = ginadapter.New(router)
 }
 
 func (server *HttpServer) Run() error {
