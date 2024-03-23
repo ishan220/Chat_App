@@ -45,7 +45,7 @@ func (server *HttpServer) SetUpRoutes(Pool *socket_pkg.Pool) {
 	router.GET("/ws", server.WebSocketHandler)
 	server.Pool = Pool
 	server.router = router
-	// ginLambda = ginadapter.New(router)
+	ginLambda = ginadapter.New(router)
 }
 
 func (server *HttpServer) Run() error {
