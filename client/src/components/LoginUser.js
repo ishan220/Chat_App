@@ -10,7 +10,7 @@ const LoginUser = () => {
 
         console.log("Inside handleLogin function")
         console.log("${process.env.REACT_APP_BACKEND_HOST}:",`${process.env.REACT_APP_BACKEND_HOST}/login`)
-        await axios.post(`${process.env.REACT_APP_BACKEND_HOST}/login`,{
+        await axios.post(`${process.env.REACT_APP_BACKEND_HOST}:8080/login`,{
             username:credentials.username,
             password:credentials.password
         }).then((data)=>{
