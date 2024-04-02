@@ -9,6 +9,7 @@ const LoginUser = () => {
         e.preventDefault();
 
         console.log("Inside handleLogin function")
+        console.log("${process.env.BACKEND_HOST}:",`${process.env.BACKEND_HOST}/login`)
         await axios.post(`${process.env.BACKEND_HOST}/login`,{
             username:credentials.username,
             password:credentials.password
