@@ -9,7 +9,7 @@ const Register = () => {
     const handleRegistration = async(e) => {
         e.preventDefault()
         console.log("Inside handleRegistration function")
-        await axios.post(`http://localhost:8080/create-user`,{
+        await axios.post(`${process.env.BACKEND_HOST}/create-user`,{
             username:credentials.username,
             password:credentials.password
         }).then((resolved)=>{

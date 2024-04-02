@@ -9,7 +9,7 @@ const LoginUser = () => {
         e.preventDefault();
 
         console.log("Inside handleLogin function")
-        await axios.post(`http://localhost:8080/login`,{
+        await axios.post(`${process.env.BACKEND_HOST}/login`,{
             username:credentials.username,
             password:credentials.password
         }).then((data)=>{
@@ -23,7 +23,6 @@ const LoginUser = () => {
         
     }
     
-    // console.log("redirectTo compl Url:",)
     console.log("rendering the comp",redirectParams.redirectTo,":",redirectParams.redirect)
   
     if(redirectParams && redirectParams.redirect) {
