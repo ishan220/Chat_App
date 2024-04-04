@@ -3,6 +3,7 @@ package httpserver
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
 	"time"
 
 	"github.com/gin-contrib/cors"
@@ -31,6 +32,11 @@ func (server *HttpServer) SetUpRoutes(Pool *socket_pkg.Pool) {
 	config := cors.DefaultConfig()
 	config.AllowOrigins = []string{"http://localhost:3000", "http://localhost:3001", "http://localhost:3000/ws", "https://chat-on-go.netlify.app", "https://chat-app-delta-five.vercel.app/"}
 	router.Use(cors.New(config))
+	router.GET("/", func(ctx *gin.Context) {
+		ctx.JSON(http.StatusOK, gin.H{"Status": "Success"})
+		return
+	})
+
 	router.POST("/create-user", server.createUser)
 	router.POST("/login", server.loginUser)
 	router.POST("/addContact", server.AddContact)
@@ -43,7 +49,8 @@ func (server *HttpServer) SetUpRoutes(Pool *socket_pkg.Pool) {
 }
 
 func (server *HttpServer) Run() error {
-	return server.router.Run("chat-app-delta-five.vercel.app:8080")
+	//return server.router.Run("chat-app-delta-five.vercel.app:8080")
+	return server.router.Run(":8080")
 	//return server.router.Run("https://chat-on-the-go.up.railway.app/")
 }
 
