@@ -24,7 +24,7 @@ COPY --from=Builder /app/main .
 ###copying migrate binary fro, builder app dir to /app/migrate
 COPY --from=Builder /app/migrate .
 COPY app.env .
-COPY start.sh .
+#COPY start.sh .
 COPY wait-for .
 #COPY --from=Builder /app/start.sh .
 ###copying db migration scripts to "/app/migration" directory
