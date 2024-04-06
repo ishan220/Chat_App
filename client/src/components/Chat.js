@@ -29,7 +29,7 @@ const Chat = () => {
         const [contactList,setContactList]  =useState([])                               
         const [message,setMessage] = useState("")
 
-    console.log("${process.env.BACKEND_HOST}:",process.env.REACT_APP_BACKEND_HOST)
+    console.log("${process.env.REACT_APP_BACKEND_HOST}:",process.env.REACT_APP_BACKEND_HOST)
     const sendMessageTo = (to) => {
         console.log("On clicking on contact:",to)
         fetchChatHistory(state.username,to)
@@ -120,7 +120,7 @@ const Chat = () => {
         setMessage("");
     }
      useEffect(()=>{
-              //console.log("Use effect getting called")
+              console.log("Use effect getting called-",`ws://${process.env.REACT_APP_WEBSOCKET_HOST}/ws`)
               const socket = new WebSocket(`ws://${process.env.REACT_APP_WEBSOCKET_HOST}/ws`)
               setSocketConn(socket)
               HandlingSocketConn(socket,(msg)=>{
