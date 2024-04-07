@@ -37,4 +37,4 @@ EXPOSE 8080
 CMD [ "/app/main" ]
 
 ##if entry point given CMD will become parameters
-ENTRYPOINT [ "/app/wait-for","postgres:5432","--","/app/start.sh" ]
+ENTRYPOINT [ "/app/start.sh" ]
