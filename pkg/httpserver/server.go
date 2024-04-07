@@ -50,7 +50,7 @@ func (server *HttpServer) SetUpRoutes(Pool *socket_pkg.Pool) {
 
 func (server *HttpServer) Run() error {
 	//return server.router.Run("chat-app-delta-five.vercel.app:8080")
-	return server.router.Run(":8080")
+	return server.router.Run("0.0.0.0:8080")
 	//return server.router.Run("https://chat-on-the-go.up.railway.app/")
 }
 
