@@ -1,6 +1,6 @@
 #Build Stage
 ##base golangimage:tag
-FROM golang:1.21-alpine3.18 AS Builder
+FROM --platform=linux/amd64 golang:1.21-alpine3.18 AS Builder
 
 ###all files copied to WORKDIR
 WORKDIR /app
