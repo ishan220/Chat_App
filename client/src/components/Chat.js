@@ -120,8 +120,8 @@ const Chat = () => {
         setMessage("");
     }
      useEffect(()=>{
-              console.log("Use effect getting called-",`ws://${process.env.REACT_APP_WEBSOCKET_HOST}/ws`)
-              const socket = new WebSocket(`ws://${process.env.REACT_APP_WEBSOCKET_HOST}/ws`)
+              console.log("Use effect getting called-",`${process.env.REACT_APP_WEBSOCKET_HOST}`)
+              const socket = new WebSocket(`${process.env.REACT_APP_WEBSOCKET_HOST}`)
               setSocketConn(socket)
               HandlingSocketConn(socket,(msg)=>{
                                         console.log("Msg received from another client",msg.data) 
