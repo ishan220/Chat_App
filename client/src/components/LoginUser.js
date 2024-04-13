@@ -10,14 +10,15 @@ const LoginUser = () => {
 
         console.log("Inside handleLogin function")
         console.log("${process.env.REACT_APP_BACKEND_HOST}:",`${process.env.REACT_APP_BACKEND_HOST}/login`)
-        await axios.post({headers:{
+        await axios({headers:{
             'Access-Control-Allow-Origin': '*',
              'Accept': 'application/json',
             'Content-Type': 'application/json'
           },url:`${process.env.REACT_APP_BACKEND_HOST}/login`,data:{
             username:credentials.username,
             password:credentials.password
-        }}).then((data)=>{
+        },method: 'POST'
+    }).then((data)=>{
             console.log("data",data)
             const redirectTo = redirectParams.redirectTo + credentials.username
             setRedirectParams({redirect:1,redirectTo})
