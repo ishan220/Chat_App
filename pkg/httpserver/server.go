@@ -37,8 +37,8 @@ func (server *HttpServer) SetUpRoutes(Pool *socket_pkg.Pool) {
 	"https://chat-app-delta-five.vercel.app/",
 	"https://go-chat-app.surge.sh",
 	"https://chatapp-production-0da2.up.railway.app"}*/
-	//config.AllowAllOrigins=
-	config.AllowOrigins = []string{"*"}
+	config.AllowAllOrigins = true
+	//config.AllowOrigins = []string{"*"}
 	config.AllowHeaders = []string{"*"}
 	router.Use(cors.New(config))
 	router.GET("/", func(ctx *gin.Context) {
