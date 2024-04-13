@@ -30,7 +30,12 @@ func NewHttpServer(store *db.SQLStore, Pool *socket_pkg.Pool) *HttpServer {
 func (server *HttpServer) SetUpRoutes(Pool *socket_pkg.Pool) {
 	router := gin.Default()
 	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"http://localhost:3000", "http://localhost:3001", "http://localhost:3000/ws", "https://chat-on-go.netlify.app", "https://chat-app-delta-five.vercel.app/", "https://go-chat-app.surge.sh"}
+	config.AllowOrigins = []string{"http://localhost:3000",
+		"http://localhost:3001", "http://localhost:3000/ws",
+		"https://chat-on-go.netlify.app",
+		"https://chat-app-delta-five.vercel.app/",
+		"https://go-chat-app.surge.sh",
+		"http://chatapp-production-0da2.up.railway.app/"}
 	router.Use(cors.New(config))
 	router.GET("/", func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, gin.H{"Status": "Success"})
