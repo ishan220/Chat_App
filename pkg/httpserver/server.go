@@ -35,7 +35,7 @@ func (server *HttpServer) SetUpRoutes(Pool *socket_pkg.Pool) {
 		"https://chat-on-go.netlify.app",
 		"https://chat-app-delta-five.vercel.app/",
 		"https://go-chat-app.surge.sh",
-		"http://chatapp-production-0da2.up.railway.app/"}
+		"https://chatapp-production-0da2.up.railway.app/"}
 	router.Use(cors.New(config))
 	router.GET("/", func(ctx *gin.Context) {
 		ctx.JSON(http.StatusOK, gin.H{"Status": "Success"})
