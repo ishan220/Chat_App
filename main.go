@@ -12,8 +12,9 @@ import (
 
 //const connectionStr = "postgres://root:secret@localhost:5432/Realtime_Chat?sslmode=disable"
 
-// const connectionStr = "user=postgres.cztvhelvpqmqvnbriapp password=ishurocks@1502 host=aws-0-ap-south-1.pooler.supabase.com port=5432 dbname=postgres"
-const connectionStr = "postgres://root:0d11a0s6MazVFStoPUbR@chat-app.c7gksy8a0o9j.ap-south-1.rds.amazonaws.com:5432/chat_app"
+const connectionStr = "user=postgres.cztvhelvpqmqvnbriapp password=ishurocks@1502 host=aws-0-ap-south-1.pooler.supabase.com port=5432 dbname=postgres"
+
+//const connectionStr = "postgres://root:0d11a0s6MazVFStoPUbR@chat-app.c7gksy8a0o9j.ap-south-1.rds.amazonaws.com:5432/chat_app"
 
 // func handler(ctx context.Context, request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 // 	lc, ok := lambdacontext.FromContext(ctx)
