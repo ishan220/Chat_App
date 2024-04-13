@@ -12,7 +12,7 @@ const LoginUser = () => {
         console.log("${process.env.REACT_APP_BACKEND_HOST}:",`${process.env.REACT_APP_BACKEND_HOST}/login`)
         await axios.post({headers:{
             'Access-Control-Allow-Origin': '*',
-            Accept: 'application/json',
+             'Accept': 'application/json',
             'Content-Type': 'application/json'
           },url:`${process.env.REACT_APP_BACKEND_HOST}/login`,data:{
             username:credentials.username,
